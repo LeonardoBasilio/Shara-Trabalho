@@ -6,7 +6,6 @@ void imprimir();
 void esquerda();
 void direita();
 int x=3,y=8;
-//int z=6;
 char matriz[8][10]; //MATRIX DO JOGO
 
 int main(void){
@@ -60,7 +59,7 @@ void imprimir(){
 }
 
 void esquerda(){//Função que move o '*' para a esquerda
-  //char aux;
+
   int i;
   
   if(x>0) { //Adicionando limite para a extremidade direita
@@ -72,10 +71,10 @@ void esquerda(){//Função que move o '*' para a esquerda
 	}
 }
 
-void direita(){//Função que move o '*' para a direita
+void direita(){//Função ques move o '*' para a direita
     int i;
-    x=4;
-	if(x<10){
+    
+	if(x<7){
 	
 	    for(i=0;i<4;i++){
 	 
