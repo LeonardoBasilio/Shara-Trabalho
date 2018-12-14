@@ -10,7 +10,7 @@ char matriz[9][11]; //MATRIX DO JOGO
 
 int main(void){
 	char tecla;
-	barra(); //Chamada da funçao de inicialização
+	barra(); //Chamada da funçao de inicialização ok
 	
 	while(1){
 		tecla = getch();
