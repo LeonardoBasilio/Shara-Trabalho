@@ -18,7 +18,7 @@ int posicaoanterior[2] = {0, 0};
 
 int main(void){
 	char tecla;
-	barra(); //Chamada da funçao de inicialização ok
+	barra(); //Chamada da funçao de inicialização 
 
 	while(1){
 		
@@ -125,16 +125,16 @@ void valoresbolinha() { // Função que determina os valores que serão somados ou 
 			movimentacao[1] = 1;
 		}
 	}
-	else if(posicaoatual[1] == 0) {
+	if(posicaoatual[1] == 0) {
 		movimentacao[1] = 1;
 	}
-	else if(posicaoatual[1] == 11) {
+	if(posicaoatual[1] == 11) {
 		movimentacao[1] = -1;
 	}
-	else if(posicaoatual[0] == 0) {
+	if(posicaoatual[0] == 0) {
 		movimentacao[0] = 1;
 	}
-	else if(posicaoatual[0] == 8) {
+	if(posicaoatual[0] == 8) {
 		gameover();
 	}
 }
@@ -146,6 +146,7 @@ void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posiçã
 	posicaoatual[1] += movimentacao[1];
 }
 void gameover() { // Função caso vc perda o jogo
+	system("cls");
 	matriz[3][1] = 'G';
 	matriz[3][2] = 'A';
 	matriz[3][3] = 'M';
@@ -155,4 +156,5 @@ void gameover() { // Função caso vc perda o jogo
 	matriz[3][7] = 'V';
 	matriz[3][8] = 'E';
 	matriz[3][9] = 'R';
+	imprimir();
 }
