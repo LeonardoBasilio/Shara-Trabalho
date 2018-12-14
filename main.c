@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <time.h>
 void barra();
 void imprimir();
 void esquerda();
@@ -20,25 +21,27 @@ int main(void){
 	barra(); //Chamada da funçao de inicialização ok
 
 	while(1){
-		if(kbhit()){ // Se eu digitar alguma coisa então a compilação entrará nessa condicional, acionando a movimentação da barra
-			tecla = getch();		
-			switch(tecla){
-				case 97: esquerda();
-					break;
-				case 100: direita();      
-					break;
-				case 113: exit(0);
-	
-				default: printf("Teclas Permitidas:\n (A) Esquerda  (D) Direita\n");
-					break;
+		
+		usleep(225000);
+			if(kbhit()){ // Se eu digitar alguma coisa então a compilação entrará nessa condicional, acionando a movimentação da barra
+				tecla = getch();		
+				switch(tecla){
+					case 97: esquerda();
+						break;
+					case 100: direita();      
+						break;
+					case 113: exit(0);
+		
+					default: printf("Teclas Permitidas:\n (A) Esquerda  (D) Direita\n");
+						break;
+				}
 			}
-		}
-		system("cls");
-		imprimir();
-		movimentacaodabolinha();
-		if (matriz[30][1] == 'G') { // Se a função game over for ativada, o while será interrompido
-			break;
-		}
+			system("cls");
+			imprimir();
+			movimentacaodabolinha();
+			if (matriz[3][1] == 'G') { // Se a função game over for ativada, o while será interrompido
+				break;
+			}
 	}
 
 	printf("\n\n");
@@ -126,17 +129,13 @@ void valoresbolinha() { // Função que determina os valores que serão somados ou 
 		movimentacao[1] = 1;
 	}
 	else if(posicaoatual[1] == 11) {
-		movimentacao[1] = 1;
+		movimentacao[1] = -1;
 	}
 	else if(posicaoatual[0] == 0) {
 		movimentacao[0] = 1;
 	}
 	else if(posicaoatual[0] == 8) {
 		gameover();
-	}
-	else {
-		posicaoatual[0] += movimentacao[0];
-		posicaoatual[1] += movimentacao[1];
 	}
 }
 void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posição;
