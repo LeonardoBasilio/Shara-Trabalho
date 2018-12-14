@@ -10,7 +10,7 @@ void valoresbolinha();
 void movimentacaodabolinha();
 void gameover();
 int x=3,y=6;
-
+int d = 1;
 char matriz[9][11]; //MATRIX DO JOGO
 int movimentacao[2] = {0, 0};
 int posicaoatual[2] = {7, 5};
@@ -19,8 +19,8 @@ int posicaoanterior[2] = {0, 0};
 int main(void){
 	char tecla;
 	barra(); //Chamada da funçao de inicialização 
-
-	while(1){
+	imprimir();
+	while(d){
 		
 		usleep(225000);
 			if(kbhit()){ // Se eu digitar alguma coisa então a compilação entrará nessa condicional, acionando a movimentação da barra
@@ -37,11 +37,7 @@ int main(void){
 				}
 			}
 			system("cls");
-			imprimir();
 			movimentacaodabolinha();
-			if (matriz[3][1] == 'G') { // Se a função game over for ativada, o while será interrompido
-				break;
-			}
 	}
 
 	printf("\n\n");
@@ -65,7 +61,6 @@ void barra(){ //Função para criar a barra do jogador
 			matriz[i][j] = '#';
 		}
 	}
-	 imprimir(); //Chamada da função imprimir
 }
 
 
@@ -75,12 +70,8 @@ void imprimir(){
 	for(i=0;i<9;i++){
 		printf("|");
 		for(j=0;j<11;j++){
-			if (i == posicaoatual[0] && j == posicaoatual[1]) {
-				printf("O");
-			} else {
-				printf("%c",matriz[i][j]);
-			}
-		}		
+			printf("%c", matriz[i][j]);
+		}	
 		printf("|\n");
 	}
 }
@@ -114,7 +105,7 @@ void direita(){//Função ques move o '*' para a direita
 	}
 }
 
-void valoresbolinha() { // Função que determina os valores que serão somados ou subtraidos nas linhas e colunas
+void valoresbolinha() { // Função que determina os valores que serão somados ou subtraidos nas linhas e colunas de acordo com a posiçao atual
 	if (posicaoatual[0] == 7 && posicaoatual[1] <= y && posicaoatual[1] >= x) {
 		if (posicaoatual[1] <= x+1) {
 			movimentacao[0] = -1;
@@ -144,8 +135,16 @@ void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posiçã
 	posicaoanterior[1] = posicaoatual[1];
 	posicaoatual[0] += movimentacao[0];
 	posicaoatual[1] += movimentacao[1];
+	matriz[posicaoanterior[0]][posicaoanterior[1]] = ' ';
+	matriz[posicaoatual[0]][posicaoatual[1]] = 'O';
+	imprimir();
+	
 }
 void gameover() { // Função caso vc perda o jogo
+	int i, j;
+	for(i=0;i<9;i++)
+		for(j=0;j<11;j++)
+			matriz[i][j] = ' ';
 	system("cls");
 	matriz[3][1] = 'G';
 	matriz[3][2] = 'A';
@@ -156,5 +155,5 @@ void gameover() { // Função caso vc perda o jogo
 	matriz[3][7] = 'V';
 	matriz[3][8] = 'E';
 	matriz[3][9] = 'R';
-	imprimir();
+	d = 0;
 }
