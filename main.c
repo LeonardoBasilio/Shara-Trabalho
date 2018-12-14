@@ -5,7 +5,7 @@ void barra();
 void imprimir();
 void esquerda();
 void direita();
-int x=3,y=8;
+int x=3,y=6;
 char matriz[9][11]; //MATRIX DO JOGO
 
 int main(void){
@@ -18,7 +18,7 @@ int main(void){
 		switch(tecla){
 			case 97: esquerda();
 				break;
-			case 100: direita();
+			case 100: direita();      
 				break;
 			case 113: exit(0);
 
@@ -69,25 +69,27 @@ void esquerda(){//Função que move o '*' para a esquerda
 
   int i;
   
-  if(x>0) { //Adicionando limite para a extremidade direita
+  if(x>0) { //Adicionando limite para a extremidade esquerda
 	  for(i=0;i<4;i++){
-	  	matriz[y][x+i] = ' ';
-	    matriz[y][x+i-1] = '*';
+		matriz[8][x+i-1] = '*';
+		matriz[8][x+i] = ' ';
 	  }
 	  x -=1;
+	  y -=1;
 	}
 }
 
 void direita(){//Função ques move o '*' para a direita
     int i;
     
-	if(x<7){
+	if(y<10){//Adicionanddo limite para a extremidade direita
 	
 	    for(i=0;i<4;i++){
-	 
-	    	matriz[y][x-i] = ' ';
-	    	matriz[y][x+i+1] = '*';
+	 		matriz[8][y-i+1] = '*';
+	 		matriz[8][y-i] = ' ';
+			
 		}
 		x +=1;
+		y +=1;
 	}
 }
