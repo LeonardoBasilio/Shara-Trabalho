@@ -6,7 +6,7 @@ void imprimir();
 void esquerda();
 void direita();
 int x=3,y=8;
-char matriz[8][10]; //MATRIX DO JOGO
+char matriz[9][11]; //MATRIX DO JOGO
 
 int main(void){
 	char tecla;
@@ -38,9 +38,16 @@ void barra(){ //Função para criar a barra do jogador
 	for(i=0;i<9;i++)
 		for(j=0;j<11;j++)
 			matriz[i][j] = ' ';
+			
 	
 	for(c = 3; c < 7; c++) {
 		matriz[8][c] = '*';
+	}
+	
+	for (i=1;i<5;i++) {
+		for (j=1;j<10;j++) {
+			matriz[i][j] = '#';
+		}
 	}
 	 imprimir(); //Chamada da função imprimir
 }
