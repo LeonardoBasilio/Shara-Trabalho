@@ -17,6 +17,7 @@ char matriz[10][12]; //MATRIX DO JOGO
 int movimentacao[2] = {0, 0};
 int posicaoatual[2] = {8, 6};
 int posicaoanterior[2] = {0, 0};
+int score = 0;
 
 int main(void){
 	char tecla;
@@ -75,7 +76,11 @@ void imprimir(){
 			printf("%c", matriz[i][j]);
 		}	
 		printf("|\n");
+		
+		
 	}
+	printf("\n \n");
+	printf("Score = %d ",score);
 }
 
 void esquerda(){//Função que move o '*' para a esquerda
@@ -168,22 +173,22 @@ void gameover() { // Função caso vc perda o jogo
 void tralhas() {
 	if (posicaodetralha == '#') { // Verifica se a posicao atual tinha um '#', se sim vai mudar a movimentaçao
 		if (movimentacao[0] == 1 && movimentacao[1] == 1) {
-			movimentacao[0] = -1;
+			movimentacao[0] = -1;score+=1;
 		}
 		else if(movimentacao[0] == -1 && movimentacao[1] == -1) {
-			movimentacao[0] = 1;
+			movimentacao[0] = 1;score+=1;
 		}
 		else if(movimentacao[0] == 1 && movimentacao[1] == -1) {
-			movimentacao[0] = -1;
+			movimentacao[0] = -1;score+=1;
 		}
 		else if(movimentacao[0] == -1 && movimentacao[1] == 1) {
-			movimentacao[0] = 1;
+			movimentacao[0] = 1;score+=1;
 		}
 		else if(movimentacao[0] == -1 && movimentacao[1] == 0) {
-			movimentacao[0] = 1;
+			movimentacao[0] = 1;score+=1;
 		}
 		else if(movimentacao[0] == 1 && movimentacao[1] == 0) {
-			movimentacao[0] = -1;
+			movimentacao[0] = -1;score+=1;
 		}
 	}
 }
