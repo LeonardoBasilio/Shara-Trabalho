@@ -10,12 +10,12 @@ void valoresbolinha();
 void movimentacaodabolinha();
 void gameover();
 void tralhas();
-int x=3,y=6;
+int x=4,y=8;
 int d = 1;
 char posicaodetralha = ' ';
-char matriz[10][11]; //MATRIX DO JOGO
+char matriz[10][12]; //MATRIX DO JOGO
 int movimentacao[2] = {0, 0};
-int posicaoatual[2] = {8, 5};
+int posicaoatual[2] = {8, 6};
 int posicaoanterior[2] = {0, 0};
 
 int main(void){
@@ -50,7 +50,7 @@ void barra(){ //Função para criar a barra do jogador
 	int i,j,c;
 	
 	for(i=0;i<9;i++)
-		for(j=0;j<11;j++)
+		for(j=0;j<12;j++)
 			matriz[i][j] = ' ';
 			
 	
@@ -59,7 +59,7 @@ void barra(){ //Função para criar a barra do jogador
 	}
 	
 	for (i=1;i<5;i++) {
-		for (j=1;j<10;j++) {
+		for (j=1;j<11;j++) {
 			matriz[i][j] = '#';
 		}
 	}
@@ -71,7 +71,7 @@ void imprimir(){
 	
 	for(i=0;i<=9;i++){
 		printf("|");
-		for(j=0;j<11;j++){
+		for(j=0;j<12;j++){
 			printf("%c", matriz[i][j]);
 		}	
 		printf("|\n");
@@ -83,7 +83,7 @@ void esquerda(){//Função que move o '*' para a esquerda
   int i;
   
   if(x>0) { //Adicionando limite para a extremidade esquerda
-	  for(i=0;i<4;i++){
+	  for(i=0;i<5;i++){
 		matriz[9][x+i-1] = '*';
 		matriz[9][x+i] = ' ';
 	  }
@@ -95,9 +95,9 @@ void esquerda(){//Função que move o '*' para a esquerda
 void direita(){//Função ques move o '*' para a direita
     int i;
     
-	if(y<10){//Adicionanddo limite para a extremidade direita
+	if(y<11){//Adicionanddo limite para a extremidade direita
 	
-	    for(i=0;i<4;i++){
+	    for(i=0;i<5;i++){
 	 		matriz[9][y-i+1] = '*';
 	 		matriz[9][y-i] = ' ';
 			
@@ -113,15 +113,19 @@ void valoresbolinha() { // Função que determina os valores que serão somados ou 
 			movimentacao[0] = -1;
 			movimentacao[1] = -1;
 		}
-		else {
+		else if (posicaoatual[1] >= y-1){
 			movimentacao[0] = -1;
 			movimentacao[1] = 1;
+		}
+		else {
+			movimentacao[0] = -1;
+			movimentacao[1] = 0;
 		}
 	}
 	if(posicaoatual[1] == 0) {
 		movimentacao[1] = 1;
 	}
-	if(posicaoatual[1] == 10) {
+	if(posicaoatual[1] == 11) {
 		movimentacao[1] = -1;
 	}
 	if(posicaoatual[0] == 0) {
@@ -174,6 +178,12 @@ void tralhas() {
 		}
 		else if(movimentacao[0] == -1 && movimentacao[1] == 1) {
 			movimentacao[0] = 1;
+		}
+		else if(movimentacao[0] == -1 && movimentacao[1] == 0) {
+			movimentacao[0] = 1;
+		}
+		else if(movimentacao[0] == 1 && movimentacao[1] == 0) {
+			movimentacao[0] = -1;
 		}
 	}
 }
