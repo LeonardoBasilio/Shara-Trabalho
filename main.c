@@ -9,11 +9,13 @@ void direita();
 void valoresbolinha();
 void movimentacaodabolinha();
 void gameover();
+void tralhas();
 int x=3,y=6;
 int d = 1;
-char matriz[9][11]; //MATRIX DO JOGO
+char posicaodetralha = ' ';
+char matriz[10][11]; //MATRIX DO JOGO
 int movimentacao[2] = {0, 0};
-int posicaoatual[2] = {7, 5};
+int posicaoatual[2] = {8, 5};
 int posicaoanterior[2] = {0, 0};
 
 int main(void){
@@ -52,8 +54,8 @@ void barra(){ //Função para criar a barra do jogador
 			matriz[i][j] = ' ';
 			
 	
-	for(c = 3; c < 7; c++) {
-		matriz[8][c] = '*';
+	for(c = x; c <= y; c++) {
+		matriz[9][c] = '*';
 	}
 	
 	for (i=1;i<5;i++) {
@@ -67,7 +69,7 @@ void barra(){ //Função para criar a barra do jogador
 void imprimir(){
 	int i,j;
 	
-	for(i=0;i<9;i++){
+	for(i=0;i<=9;i++){
 		printf("|");
 		for(j=0;j<11;j++){
 			printf("%c", matriz[i][j]);
@@ -82,8 +84,8 @@ void esquerda(){//Função que move o '*' para a esquerda
   
   if(x>0) { //Adicionando limite para a extremidade esquerda
 	  for(i=0;i<4;i++){
-		matriz[8][x+i-1] = '*';
-		matriz[8][x+i] = ' ';
+		matriz[9][x+i-1] = '*';
+		matriz[9][x+i] = ' ';
 	  }
 	  x -=1;
 	  y -=1;
@@ -96,8 +98,8 @@ void direita(){//Função ques move o '*' para a direita
 	if(y<10){//Adicionanddo limite para a extremidade direita
 	
 	    for(i=0;i<4;i++){
-	 		matriz[8][y-i+1] = '*';
-	 		matriz[8][y-i] = ' ';
+	 		matriz[9][y-i+1] = '*';
+	 		matriz[9][y-i] = ' ';
 			
 		}
 		x +=1;
@@ -106,7 +108,7 @@ void direita(){//Função ques move o '*' para a direita
 }
 
 void valoresbolinha() { // Função que determina os valores que serão somados ou subtraidos nas linhas e colunas de acordo com a posiçao atual
-	if (posicaoatual[0] == 7 && posicaoatual[1] <= y && posicaoatual[1] >= x) {
+	if (posicaoatual[0] == 8 && posicaoatual[1] <= y+1 && posicaoatual[1] >= x-1) {
 		if (posicaoatual[1] <= x+1) {
 			movimentacao[0] = -1;
 			movimentacao[1] = -1;
@@ -119,22 +121,24 @@ void valoresbolinha() { // Função que determina os valores que serão somados ou 
 	if(posicaoatual[1] == 0) {
 		movimentacao[1] = 1;
 	}
-	if(posicaoatual[1] == 11) {
+	if(posicaoatual[1] == 10) {
 		movimentacao[1] = -1;
 	}
 	if(posicaoatual[0] == 0) {
 		movimentacao[0] = 1;
 	}
-	if(posicaoatual[0] == 8) {
+	if(posicaoatual[0] == 9) {
 		gameover();
 	}
 }
-void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posição;
+void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posição; 
 	valoresbolinha();
 	posicaoanterior[0] = posicaoatual[0];
 	posicaoanterior[1] = posicaoatual[1];
+	tralhas();
 	posicaoatual[0] += movimentacao[0];
 	posicaoatual[1] += movimentacao[1];
+	posicaodetralha = matriz[posicaoatual[0]][posicaoatual[1]];
 	matriz[posicaoanterior[0]][posicaoanterior[1]] = ' ';
 	matriz[posicaoatual[0]][posicaoatual[1]] = 'O';
 	imprimir();
@@ -155,5 +159,21 @@ void gameover() { // Função caso vc perda o jogo
 	matriz[3][7] = 'V';
 	matriz[3][8] = 'E';
 	matriz[3][9] = 'R';
-	d = 0;
+	d = 0; // Acaba com o while
+}
+void tralhas() {
+	if (posicaodetralha == '#') { // Verifica se a posicao atual tinha um '#', se sim vai mudar a movimentaçao
+		if (movimentacao[0] == 1 && movimentacao[1] == 1) {
+			movimentacao[0] = -1;
+		}
+		else if(movimentacao[0] == -1 && movimentacao[1] == -1) {
+			movimentacao[0] = 1;
+		}
+		else if(movimentacao[0] == 1 && movimentacao[1] == -1) {
+			movimentacao[0] = -1;
+		}
+		else if(movimentacao[0] == -1 && movimentacao[1] == 1) {
+			movimentacao[0] = 1;
+		}
+	}
 }
