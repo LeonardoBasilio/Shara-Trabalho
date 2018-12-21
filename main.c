@@ -10,6 +10,7 @@ void valoresbolinha();
 void movimentacaodabolinha();
 void gameover();
 void tralhas();
+void varredura();
 int x=4,y=8;
 int d = 1;
 char posicaodetralha = ' ';
@@ -34,13 +35,14 @@ int main(void){
 					case 100: direita();      
 						break;
 					case 113: exit(0);
-		
+						break;
 					default: printf("Teclas Permitidas:\n (A) Esquerda  (D) Direita\n");
 						break;
 				}
 			}
 			system("cls");
 			movimentacaodabolinha();
+			varredura();
 	}
 
 	printf("\n\n");
@@ -169,6 +171,47 @@ void gameover() { // Função caso vc perda o jogo
 	matriz[3][8] = 'E';
 	matriz[3][9] = 'R';
 	d = 0; // Acaba com o while
+}
+void varredura(){
+	int p = 0;
+	int i,j;
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 12; j++) {
+			if (matriz[i][j] == '#') {
+				p++;
+			}
+		}
+	}
+	if (p == 0) {
+		for(i=0;i<9;i++)
+			for(j=0;j<11;j++)
+				matriz[i][j] = ' ';
+		system("cls");
+		matriz[3][1] = 'V';
+		matriz[3][2] = 'O';
+		matriz[3][3] = 'C';
+		matriz[3][4] = 'E';
+		
+		matriz[3][6] = 'G';
+		matriz[3][7] = 'A';
+		matriz[3][8] = 'N';
+		matriz[3][9] = 'H';
+		matriz[3][10] = 'O';
+		matriz[3][11] = 'U';
+		
+		matriz[4][2] = 'P';
+		matriz[4][3] = 'A';
+		matriz[4][4] = 'R';
+		matriz[4][5] = 'A';
+		matriz[4][6] = 'B';
+		matriz[4][7] = 'E';
+		matriz[4][8] = 'N';
+		matriz[4][9] = 'S';
+		imprimir();
+		d = 0;
+	}
+
+	
 }
 void tralhas() {
 	if (posicaodetralha == '#') { // Verifica se a posicao atual tinha um '#', se sim vai mudar a movimentaçao
