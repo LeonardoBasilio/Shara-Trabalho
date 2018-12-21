@@ -11,10 +11,13 @@ void movimentacaodabolinha();
 void gameover();
 void tralhas();
 void varredura();
-int x=4,y=8;
+void cima();
+void baixo();
+int x=4,y=8,z = 9;
+int t,u;
 int d = 1;
 char posicaodetralha = ' ';
-char matriz[10][12]; //MATRIX DO JOGO
+char matriz[10][12]; //MATRIX DO JOGO 
 int movimentacao[2] = {0, 0};
 int posicaoatual[2] = {8, 6};
 int posicaoanterior[2] = {0, 0};
@@ -30,6 +33,10 @@ int main(void){
 			if(kbhit()){ // Se eu digitar alguma coisa então a compilação entrará nessa condicional, acionando a movimentação da barra
 				tecla = getch();		
 				switch(tecla){
+					case 119:cima();
+						break;
+					case 115:baixo();
+						break;
 					case 97: esquerda();
 						break;
 					case 100: direita();      
@@ -58,7 +65,7 @@ void barra(){ //Função para criar a barra do jogador
 			
 	
 	for(c = x; c <= y; c++) {
-		matriz[9][c] = '*';
+		matriz[z][c] = '*';
 	}
 	
 	for (i=1;i<5;i++) {
@@ -91,8 +98,8 @@ void esquerda(){//Função que move o '*' para a esquerda
   
   if(x>0) { //Adicionando limite para a extremidade esquerda
 	  for(i=0;i<5;i++){
-		matriz[9][x+i-1] = '*';
-		matriz[9][x+i] = ' ';
+		matriz[z][x+i-1] = '*';
+		matriz[z][x+i] = ' ';
 	  }
 	  x -=1;
 	  y -=1;
@@ -105,8 +112,8 @@ void direita(){//Função ques move o '*' para a direita
 	if(y<11){//Adicionanddo limite para a extremidade direita
 	
 	    for(i=0;i<5;i++){
-	 		matriz[9][y-i+1] = '*';
-	 		matriz[9][y-i] = ' ';
+	 		matriz[z][y-i+1] = '*';
+	 		matriz[z][y-i] = ' ';
 			
 		}
 		x +=1;
@@ -115,7 +122,7 @@ void direita(){//Função ques move o '*' para a direita
 }
 
 void valoresbolinha() { // Função que determina os valores que serão somados ou subtraidos nas linhas e colunas de acordo com a posiçao atual
-	if (posicaoatual[0] == 8 && posicaoatual[1] <= y+1 && posicaoatual[1] >= x-1) {
+	if (posicaoatual[0] == z-1 && posicaoatual[1] <= y+1 && posicaoatual[1] >= x-1) {
 		if (posicaoatual[1] <= x+1) {
 			movimentacao[0] = -1;
 			movimentacao[1] = -1;
@@ -212,6 +219,26 @@ void varredura(){
 	}
 
 	
+}
+void cima() {
+	z--;
+	int c, j;
+	for (j = 0; j < 12; j++) {
+		matriz[z+1][j] = ' ';
+	}
+	for(c = x; c <= y; c++) {
+		matriz[z][c] = '*';
+	}
+}
+void baixo() {
+	z++;
+	int c, j;
+	for (j = 0; j < 12; j++) {
+		matriz[z-1][j] = ' ';
+	}
+	for(c = x; c <= y; c++) {
+		matriz[z][c] = '*';
+	}
 }
 void tralhas() {
 	if (posicaodetralha == '#') { // Verifica se a posicao atual tinha um '#', se sim vai mudar a movimentaçao
