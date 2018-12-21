@@ -49,7 +49,6 @@ int main(void){
 			}
 			system("cls");
 			movimentacaodabolinha();
-			varredura();
 	}
 
 	printf("\n\n");
@@ -145,6 +144,7 @@ void valoresbolinha() { // Função que determina os valores que serão somados ou 
 	if(posicaoatual[0] == 0) {
 		movimentacao[0] = 1;
 	}
+	varredura();
 	if(posicaoatual[0] == 9) {
 		gameover();
 	}
@@ -221,23 +221,28 @@ void varredura(){
 	
 }
 void cima() {
-	z--;
-	int c, j;
-	for (j = 0; j < 12; j++) {
-		matriz[z+1][j] = ' ';
+	if (z > 7) {
+		z--;
+		int c, j;
+		for (j = 0; j < 12; j++) {
+			matriz[z+1][j] = ' ';
+		}
+		for(c = x; c <= y; c++) {
+			matriz[z][c] = '*';
+		}	
 	}
-	for(c = x; c <= y; c++) {
-		matriz[z][c] = '*';
-	}
+
 }
 void baixo() {
-	z++;
-	int c, j;
-	for (j = 0; j < 12; j++) {
-		matriz[z-1][j] = ' ';
-	}
-	for(c = x; c <= y; c++) {
-		matriz[z][c] = '*';
+	if (z < 9) {
+		z++;
+		int c, j;
+		for (j = 0; j < 12; j++) {
+			matriz[z-1][j] = ' ';
+		}
+		for(c = x; c <= y; c++) {
+			matriz[z][c] = '*';
+		}
 	}
 }
 void tralhas() {
