@@ -15,6 +15,7 @@ void cima();
 void baixo();
 int x=4,y=8,z = 9;
 int t,u;
+int controlesaida = 0;
 int d = 1;
 char posicaodetralha = ' ';
 char matriz[10][12]; //MATRIX DO JOGO 
@@ -77,16 +78,15 @@ void barra(){ //Função para criar a barra do jogador
 
 void imprimir(){
 	int i,j;
-	
+	printf("++++++++++++++\n");
 	for(i=0;i<=9;i++){
 		printf("|");
 		for(j=0;j<12;j++){
 			printf("%c", matriz[i][j]);
 		}	
-		printf("|\n");
-		
-		
+		printf("|\n");	
 	}
+	printf("++++++++++++++");
 	printf("\n \n");
 	printf("Score = %d ",score);
 }
@@ -157,8 +157,13 @@ void movimentacaodabolinha() { // Funcao de atribuir na 'O' a sua proxima posiçã
 	posicaoatual[0] += movimentacao[0];
 	posicaoatual[1] += movimentacao[1];
 	posicaodetralha = matriz[posicaoatual[0]][posicaoatual[1]];
-	matriz[posicaoanterior[0]][posicaoanterior[1]] = ' ';
-	matriz[posicaoatual[0]][posicaoatual[1]] = 'O';
+	if (controlesaida == 1) {
+		matriz[posicaoatual[0]][posicaoatual[1]]= ' ';
+	}
+	else {
+		matriz[posicaoanterior[0]][posicaoanterior[1]] = ' ';
+		matriz[posicaoatual[0]][posicaoatual[1]] = 'O';
+	}
 	imprimir();
 	
 }
@@ -214,8 +219,8 @@ void varredura(){
 		matriz[4][7] = 'E';
 		matriz[4][8] = 'N';
 		matriz[4][9] = 'S';
-		imprimir();
 		d = 0;
+		controlesaida = 1;
 	}
 
 	
